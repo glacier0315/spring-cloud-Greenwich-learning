@@ -1,0 +1,10 @@
+dependencies {
+    // 本地依赖
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation(
+            "org.mybatis.spring.boot:mybatis-spring-boot-starter:${mybatisBootVersion}",
+            "com.github.pagehelper:pagehelper-spring-boot-starter:${pageHelperVersion}"
+    )
+
+}

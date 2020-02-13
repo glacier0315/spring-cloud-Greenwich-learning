@@ -1,3 +1,8 @@
+plugins {
+    id "org.springframework.boot" version "2.1.9.RELEASE" apply(false)
+    id "com.arenagod.gradle.MybatisGenerator" version "1.4" apply(false)
+}
+
 allprojects {
     apply plugin: 'java'
 
@@ -57,5 +62,31 @@ allprojects {
         println("delete $project out & logs")
         delete "out"
         delete "logs"
+    }
+
+    task mkdirs() {
+        sourceSets*.java.srcDirs*.each {
+            it.mkdirs()
+        }
+        sourceSets*.resources.srcDirs*.each {
+            it.mkdirs()
+        }
+    }
+}
+
+def javaProjects() {
+    return subprojects.findAll { !it.name.startsWith('common')  }
+}
+
+configure(javaProjects()) {
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    dependencyManagement {
+        imports {
+            //spring bom helps us to declare dependencies without specifying version numbers.
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:Greenwich.SR3"
+            mavenBom "com.alibaba.cloud:spring-cloud-alibaba-dependencies:2.1.1.RELEASE"
+        }
     }
 }

@@ -1,0 +1,25 @@
+subprojects {
+    dependencies {
+        implementation project(':common:common-core')
+
+        // spring boot
+        implementation(
+                "org.springframework.boot:spring-boot-starter-web"
+        )
+
+        implementation(
+                "com.alibaba:druid-spring-boot-starter:${druidVersion}"
+        )
+
+        // swagger
+        implementation(
+                "io.springfox:springfox-swagger-ui:${swaggerVersion}",
+                "io.springfox:springfox-swagger2:${swaggerVersion}"
+        )
+
+        implementation 'org.springframework.boot:spring-boot-actuator'
+        runtimeOnly "org.springframework.boot:spring-boot-devtools"
+        runtimeOnly "mysql:mysql-connector-java"
+        testImplementation "org.springframework.boot:spring-boot-starter-test"
+    }
+}
