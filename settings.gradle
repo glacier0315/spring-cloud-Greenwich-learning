@@ -3,7 +3,7 @@ rootProject.name = 'spring-cloud-Greenwich-learning'
 // 引入 common
 include('common:common-core')
 
-include(
-        'mybatis:mybatis',
-        'mybatis:mybatis-plus'
-)
+//include(
+//        'mybatis:mybatis',
+//        'mybatis:mybatis-plus'
+//)
