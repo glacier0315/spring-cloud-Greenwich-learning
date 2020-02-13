@@ -7,19 +7,18 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * 角色Mapper
+ * 角色数据层
  *
  * @author glacier
  * @version 1.0
- * @date 2020-02-12 10:59
+ * @date 2019-08-04 21:53
  */
 public interface RoleMapper extends BaseMapper<Role> {
-
     /**
-     * 根据用户名查找角色权限编码集合
+     * 根绝用户id 查询用户所拥有的角色
      *
      * @param userId
      * @return
      */
-    List<String> findRoleCodesByUser(@Param("userId") String userId);
+    List<Role> findByUserId(@Param("userId") String userId);
 }

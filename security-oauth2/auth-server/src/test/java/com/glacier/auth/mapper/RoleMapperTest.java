@@ -1,5 +1,6 @@
 package com.glacier.auth.mapper;
 
+import com.glacier.auth.entity.Role;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +28,7 @@ public class RoleMapperTest {
     @Test
     public void findRoleCodesByUser() {
         String userId = "1";
-        List<String> codes = roleMapper.findRoleCodesByUser(userId);
+        List<Role> codes = roleMapper.findByUserId(userId);
         Assert.assertNotNull(codes);
         Assert.assertFalse(codes.isEmpty());
     }

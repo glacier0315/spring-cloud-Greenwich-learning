@@ -4,12 +4,13 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.glacier.auth.entity.User;
 
 /**
- * 用户Mapper
+ * 用户数据层
  *
  * @author glacier
  * @version 1.0
- * @date 2020-02-12 10:30
+ * @date 2019-08-04 21:53
  */
 public interface UserMapper extends BaseMapper<User> {
+
 
 }

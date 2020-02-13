@@ -1,10 +1,17 @@
 package com.glacier.auth.controller;
 
+import com.glacier.auth.consumer.UserConsumer;
+import com.glacier.auth.entity.User;
+import com.glacier.common.http.HttpResult;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @author glacier
@@ -13,15 +20,29 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserController {
 
-    @GetMapping(value = "/current")
-    public Object current() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    private final UserConsumer userConsumer;
+
+    @GetMapping(value = "/me")
+    public Object me(OAuth2Authentication oAuth2Authentication) {
+        Object principal = oAuth2Authentication.getPrincipal();
         log.info(">>>>>>>>>>>>>>>>>>>>>>>>");
-        log.info(principal.toString());
+        log.info("当前登录用户为: {}", principal);
         log.info(">>>>>>>>>>>>>>>>>>>>>>>>");
         return principal;
+    }
+
+    /**
+     * 分页查询用户
+     *
+     * @param user
+     * @return
+     */
+    @GetMapping("findList")
+    public HttpResult<List<User>> findList(User user) {
+        return userConsumer.findList(user);
     }
 }

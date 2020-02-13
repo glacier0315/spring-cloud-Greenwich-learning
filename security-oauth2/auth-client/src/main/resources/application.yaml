@@ -25,22 +25,22 @@ spring:
       enabled: true
 
 oauth2:
-  base-url: http://localhost:8510
+  base-url: http://localhost:8510/uas
 
 security:
   oauth2:
     client:
-      client-id: user-client
-      client-secret: user-client
-      user-authorization-uri: ${oauth2.base-url}/uua/oauth/authorize
-      access-token-uri: ${oauth2.base-url}/uua/oauth/token
+      client-id: auth-client
+      client-secret: auth-client
+      user-authorization-uri: ${oauth2.base-url}/oauth/authorize
+      access-token-uri: ${oauth2.base-url}/oauth/token
       pre-established-redirect-uri:
     resource:
-      user-info-uri: http://localhost:8520/users/current
+      user-info-uri: ${oauth2.base-url}/user/me
+      token-info-uri: ${oauth2.base-url}/oauth/check_token
       jwt:
-        key-uri: ${oauth2.base-url}/uua/oauth/token_key
-    authorization:
-      check-token-access: ${oauth2.base-url}/uua/oauth/check_token
+        key-uri: ${oauth2.base-url}/oauth/token_key
+
 
 management:
   endpoints:

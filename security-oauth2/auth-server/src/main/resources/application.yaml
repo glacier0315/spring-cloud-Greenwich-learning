@@ -48,9 +48,9 @@ spring:
 
 mybatis-plus:
   # 映射文件位置
-  mapper-locations: classpath*:mybatis/mapper/**/*.xml
+  mapper-locations: classpath*:mybatis/mapper/*.xml
   #config-location:  classpath:mybatis/mybatis-config.xml
-  type-aliases-package: com.glacier.auth.**.entity
+  type-aliases-package: com.glacier.auth.entity
   global-config:
     db-config:
       id-type: assign_uuid
@@ -67,7 +67,8 @@ mybatis-plus:
 
 server:
   servlet:
-    context-path: /uua
+    # 不配置，单点登录出现问题
+    context-path: /uas
 
 management:
   endpoints:

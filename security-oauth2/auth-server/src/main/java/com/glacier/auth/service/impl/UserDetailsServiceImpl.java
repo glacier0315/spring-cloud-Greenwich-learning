@@ -2,6 +2,7 @@ package com.glacier.auth.service.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.glacier.auth.entity.Role;
 import com.glacier.auth.entity.User;
 import com.glacier.auth.entity.dto.UserDetailsDto;
 import com.glacier.auth.mapper.RoleMapper;
@@ -14,7 +15,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author glacier
@@ -43,7 +46,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .build()));
         if (user != null) {
             // 查找角色
-            List<String> authorityList = roleMapper.findRoleCodesByUser(user.getId());
+            List<Role> roles = roleMapper.findByUserId(user.getId());
+            List<String> authorityList = new ArrayList<>(1);
+            if (roles != null && !roles.isEmpty()) {
+                authorityList = roles.stream()
+                        .map(Role::getCode)
+                        .collect(Collectors.toList());
+            }
             return UserDetailsDto.builder()
                     .userId(user.getId())
                     .username(user.getUsername())

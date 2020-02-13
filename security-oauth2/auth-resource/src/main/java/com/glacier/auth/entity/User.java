@@ -1,7 +1,5 @@
 package com.glacier.auth.entity;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 
 import java.io.Serializable;
@@ -10,6 +8,7 @@ import java.util.List;
 
 /**
  * 用户
+ *
  * @author glacier
  * @version 1.0
  * @date 2019-08-04 13:45
@@ -19,13 +18,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@TableName(excludeProperty = {"deptName", "roleIds"})
 public class User implements Serializable {
     private static final long serialVersionUID = -3083387263445135811L;
     /**
      * 主键
      */
-    @TableId
     private String id;
     /**
      * 用户名

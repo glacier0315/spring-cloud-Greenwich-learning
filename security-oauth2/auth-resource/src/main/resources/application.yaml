@@ -13,27 +13,16 @@ spring:
     nacos:
       discovery:
         server-addr: 192.168.10.130:8848
-  feign:
-    compression:
-      request:
-        enabled: true
-        mime-types: text/xml,application/xml,application/json
-        min-request-size: 2048
-      response:
-        enabled: true
-    hystrix:
-      enabled: true
 
 oauth2:
-  base-url: http://localhost:8510
+  base-url: http://localhost:8510/uas
 
 security:
   oauth2:
     resource:
+      token-info-uri: ${oauth2.base-url}/oauth/check_token
       jwt:
-        key-uri: ${oauth2.base-url}/uua/oauth/token_key
-    authorization:
-      check-token-access: ${oauth2.base-url}/uua/oauth/check_token
+        key-uri: ${oauth2.base-url}/oauth/token_key
 
 
 management:

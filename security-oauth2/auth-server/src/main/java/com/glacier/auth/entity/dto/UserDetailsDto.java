@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * security 用户详情
+ *
  * @author hebin
  * @version 1.0
  * @date 2019-10-25 15:27

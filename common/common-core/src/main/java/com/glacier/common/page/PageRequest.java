@@ -8,6 +8,8 @@ import lombok.ToString;
 import java.io.Serializable;
 
 /**
+ * 分页请求类
+ *
  * @author glacier
  * @version 1.0
  * @description
