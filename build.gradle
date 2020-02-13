@@ -1,0 +1,61 @@
+allprojects {
+    apply plugin: 'java'
+
+    // 指定jdk版本
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    group = 'com.glacier'
+    version = '0.0.1'
+
+    ext {
+        springBootVersion = "2.1.9.RELEASE"
+        springCloudAlibabaVersion = "2.1.1.RELEASE"
+        springCloudVersion = "Greenwich.SR3"
+        mybatisGeneratorVersion = "1.4"
+
+        swaggerVersion = '2.9.2'
+        mybatisBootVersion = '2.1.0'
+        druidVersion = '1.1.18'
+        pageHelperVersion = "1.2.12"
+        jacksonVersion = "2.9.9.3"
+        lombokVersion = "1.18.10"
+        oauth2Version = "2.1.9.RELEASE"
+        jjwtVersion = "0.9.1"
+        hutoolVersion = "5.1.2"
+        mybatisPlusVersion = "3.3.1.tmp"
+        kaptchaVersion = "1.1.0"
+        springBootAdminVersion = "2.1.6"
+    }
+
+    // 指定仓库
+    repositories {
+        mavenLocal()
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        maven { url 'https://maven.aliyun.com/repository/spring' }
+        maven { url 'https://maven.aliyun.com/repository/spring-plugin' }
+    }
+
+    dependencies {
+        // lombok
+        compileOnly("org.projectlombok:lombok:${lombokVersion}")
+        annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+
+        testCompileOnly("org.projectlombok:lombok:${lombokVersion}")
+        testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+        // testImplementation('org.junit.jupiter:junit-jupiter-api:5.6.0')
+    }
+
+    // 设置编码
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+
+    //删除文件
+    task cleanTempFiles() {
+        println("delete $project out & logs")
+        delete "out"
+        delete "logs"
+    }
+}
