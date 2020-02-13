@@ -2,14 +2,8 @@ plugins {
     id "org.springframework.boot" version "2.1.9.RELEASE" apply(false)
     id "com.arenagod.gradle.MybatisGenerator" version "1.4" apply(false)
 }
-
+// 配置所有项目公有
 allprojects {
-    apply plugin: 'java'
-
-    // 指定jdk版本
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
-
     group = 'com.glacier'
     version = '0.0.1'
 
@@ -41,6 +35,14 @@ allprojects {
         maven { url 'https://maven.aliyun.com/repository/spring' }
         maven { url 'https://maven.aliyun.com/repository/spring-plugin' }
     }
+}
+// 配置子项目
+subprojects {
+    apply plugin: 'java'
+
+    // 指定jdk版本
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 
     dependencies {
         // lombok
@@ -49,21 +51,22 @@ allprojects {
 
         testCompileOnly("org.projectlombok:lombok:${lombokVersion}")
         testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+        // 配置junit 4 单元测试
         testImplementation "junit:junit:4.12"
     }
 
-    // 设置编码
+    // 设置编码为UTF-8
     tasks.withType(JavaCompile) {
         options.encoding = "UTF-8"
     }
 
-    //删除文件
+    //配置 删除文件夹
     task cleanTempFiles() {
         println("delete $project out & logs")
         delete "out"
         delete "logs"
     }
-
+    // 配置 创建源文件夹
     task mkdirs() {
         sourceSets*.java.srcDirs*.each {
             it.mkdirs()
@@ -74,19 +77,39 @@ allprojects {
     }
 }
 
-def javaProjects() {
-    return subprojects.findAll { !it.name.startsWith('common')  }
-}
-
-configure(javaProjects()) {
+// 配置指定子项目  spring cloud 模块
+configure(
+        subprojects.findAll {
+            // 排除 common 模块
+            !it.name.startsWith('common')
+        }
+) {
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
 
     dependencyManagement {
+        // 导入依赖管理
         imports {
-            //spring bom helps us to declare dependencies without specifying version numbers.
-            mavenBom "org.springframework.cloud:spring-cloud-dependencies:Greenwich.SR3"
-            mavenBom "com.alibaba.cloud:spring-cloud-alibaba-dependencies:2.1.1.RELEASE"
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+            mavenBom "com.alibaba.cloud:spring-cloud-alibaba-dependencies:${springCloudAlibabaVersion}"
         }
+    }
+
+    dependencies {
+        // spring boot
+        implementation(
+                "org.springframework.boot:spring-boot-starter-web",
+                "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
+        )
+
+        // swagger
+        implementation(
+                "io.springfox:springfox-swagger-ui:${swaggerVersion}",
+                "io.springfox:springfox-swagger2:${swaggerVersion}"
+        )
+
+        implementation 'org.springframework.boot:spring-boot-actuator'
+        runtimeOnly "org.springframework.boot:spring-boot-devtools"
+        testImplementation "org.springframework.boot:spring-boot-starter-test"
     }
 }
