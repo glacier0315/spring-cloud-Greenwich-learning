@@ -1,4 +1,4 @@
-package com.glacier.common.page;
+package com.glacier.common.core.page;
 
 import lombok.*;
 

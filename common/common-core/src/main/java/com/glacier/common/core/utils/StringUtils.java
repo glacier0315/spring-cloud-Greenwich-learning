@@ -1,4 +1,4 @@
-package com.glacier.common.utils;
+package com.glacier.common.core.utils;
 
 /**
  * @author glacier

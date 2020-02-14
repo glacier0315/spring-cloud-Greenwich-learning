@@ -2,9 +2,9 @@ package com.glacier.auth.consumer.fallback;
 
 import com.glacier.auth.consumer.AuthUserConsumer;
 import com.glacier.auth.entity.User;
-import com.glacier.common.http.HttpResult;
-import com.glacier.common.page.PageRequest;
-import com.glacier.common.page.PageResponse;
+import com.glacier.common.core.http.HttpResult;
+import com.glacier.common.core.page.PageRequest;
+import com.glacier.common.core.page.PageResponse;
 import org.springframework.stereotype.Component;
 
 /**

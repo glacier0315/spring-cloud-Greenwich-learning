@@ -2,7 +2,7 @@ package com.glacier.auth.consumer;
 
 import com.glacier.auth.consumer.fallback.UserConsumerFallback;
 import com.glacier.auth.entity.User;
-import com.glacier.common.http.HttpResult;
+import com.glacier.common.core.http.HttpResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

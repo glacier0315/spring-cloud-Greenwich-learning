@@ -1,4 +1,4 @@
-package com.glacier.common.entity.dto;
+package com.glacier.common.core.entity.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

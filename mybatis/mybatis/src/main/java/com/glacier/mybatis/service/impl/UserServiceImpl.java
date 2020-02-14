@@ -3,7 +3,7 @@ package com.glacier.mybatis.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.glacier.common.page.PageRequest;
+import com.glacier.common.core.page.PageRequest;
 import com.glacier.mybatis.entity.User;
 import com.glacier.mybatis.mapper.UserMapper;
 import com.glacier.mybatis.service.UserService;

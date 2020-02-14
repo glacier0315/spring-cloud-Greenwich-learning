@@ -3,7 +3,7 @@ package com.glacier.mybatis.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.glacier.common.page.PageRequest;
+import com.glacier.common.core.page.PageRequest;
 import com.glacier.mybatis.entity.User;
 import com.glacier.mybatis.mapper.UserMapper;
 import com.glacier.mybatis.service.UserService;

@@ -1,4 +1,4 @@
-package com.glacier.common.http;
+package com.glacier.common.core.http;
 
 import lombok.*;
 

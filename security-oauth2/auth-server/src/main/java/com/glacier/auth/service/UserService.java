@@ -1,8 +1,8 @@
 package com.glacier.auth.service;
 
 import com.glacier.auth.entity.User;
-import com.glacier.common.page.PageRequest;
-import com.glacier.common.page.PageResponse;
+import com.glacier.common.core.page.PageRequest;
+import com.glacier.common.core.page.PageResponse;
 
 /**
  * 用户业务层

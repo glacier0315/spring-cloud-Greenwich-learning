@@ -2,7 +2,7 @@ package com.glacier.auth.controller;
 
 import com.glacier.auth.consumer.UserConsumer;
 import com.glacier.auth.entity.User;
-import com.glacier.common.http.HttpResult;
+import com.glacier.common.core.http.HttpResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

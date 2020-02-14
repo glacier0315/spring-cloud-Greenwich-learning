@@ -2,7 +2,7 @@ package com.glacier.auth.consumer.fallback;
 
 import com.glacier.auth.consumer.UserConsumer;
 import com.glacier.auth.entity.User;
-import com.glacier.common.http.HttpResult;
+import com.glacier.common.core.http.HttpResult;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

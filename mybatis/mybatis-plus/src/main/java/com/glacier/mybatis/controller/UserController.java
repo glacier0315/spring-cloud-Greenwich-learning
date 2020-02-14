@@ -1,8 +1,8 @@
 package com.glacier.mybatis.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.glacier.common.http.HttpResult;
-import com.glacier.common.page.PageRequest;
+import com.glacier.common.core.http.HttpResult;
+import com.glacier.common.core.page.PageRequest;
 import com.glacier.mybatis.entity.User;
 import com.glacier.mybatis.service.UserService;
 import lombok.RequiredArgsConstructor;
