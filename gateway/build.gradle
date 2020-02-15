@@ -1,0 +1,13 @@
+subprojects {
+    dependencies {
+        implementation project(':common:common-core')
+
+        // spring boot
+        implementation(
+                "org.springframework.cloud:spring-cloud-starter-gateway"
+        )
+
+        // spring-boot-admin
+        implementation("de.codecentric:spring-boot-admin-client:${springBootAdminVersion}")
+    }
+}

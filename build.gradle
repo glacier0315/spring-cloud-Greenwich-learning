@@ -83,7 +83,7 @@ configure(
             // 排除 common 模块
             !it.name.startsWith('common')
         }
-) {
+) { Project project ->
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
 
@@ -97,8 +97,13 @@ configure(
 
     dependencies {
         // spring boot
+        // spring cloud gateway 非基于servet
+        if (!project.name.startsWith("gateway")) {
+            implementation(
+                    "org.springframework.boot:spring-boot-starter-web"
+            )
+        }
         implementation(
-                "org.springframework.boot:spring-boot-starter-web",
                 "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
         )
 

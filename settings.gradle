@@ -12,6 +12,9 @@ include('common:common-core')
 // 引入 spring boot admin
 include('boot-admin')
 
+// 引入 gateway
+include('gateway:gateway1')
+
 // 引入
 include(
         'security-oauth2:auth-server',
