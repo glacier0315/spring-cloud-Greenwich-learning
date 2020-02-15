@@ -9,6 +9,9 @@ include('common:common-core')
 //        'mybatis:mybatis-plus'
 //)
 
+// 引入 spring boot admin
+include('boot-admin')
+
 // 引入
 include(
         'security-oauth2:auth-server',
