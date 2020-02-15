@@ -1,18 +1,6 @@
 spring:
   profiles:
     active: dev
-  application:
-    name: auth-server
-  boot:
-    admin:
-      client:
-        url: "http://192.168.10.1:8091"
-        instance:
-          prefer-ip: true
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 192.168.10.130:8848
   datasource:
     name: mysql1
     type: com.alibaba.druid.pool.DruidDataSource
@@ -65,6 +53,7 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     aggressive-lazy-loading: false
 
+
 server:
   servlet:
     # 不配置，单点登录出现问题
@@ -78,3 +67,18 @@ management:
   endpoint:
     health:
       show-details: always
+
+##
+settings:
+  security:
+    permit-all:
+      - /login
+      - /logout
+      - /favicon.ico
+      - /static/**
+      - /webjars/**
+      - /actuator/**
+      - /druid/**
+      - /swagger-ui.html
+      - /swagger-resources/**
+      - /v2/api-docs

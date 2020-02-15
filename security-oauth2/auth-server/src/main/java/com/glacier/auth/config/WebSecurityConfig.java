@@ -1,7 +1,9 @@
 package com.glacier.auth.config;
 
+import com.glacier.auth.settings.SecuritySettings;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,9 +22,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * @date 2019-08-04 10:03
  */
 @Configuration
+@EnableConfigurationProperties(SecuritySettings.class)
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private final SecuritySettings securitySettings;
 
     /**
      * 密码工具类
@@ -60,11 +65,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        String[] permitAll = new String[0];
+        if (securitySettings.getPermitAll() != null && !securitySettings.getPermitAll().isEmpty()) {
+            permitAll = securitySettings.getPermitAll().toArray(permitAll);
+        }
         http.authorizeRequests()
-                .antMatchers("/hello", "/login", "/logout")
+                .antMatchers(permitAll)
                 .permitAll()
                 .anyRequest()
-                .permitAll()
+                .authenticated()
                 .and()
                 .formLogin()
                 .permitAll()
