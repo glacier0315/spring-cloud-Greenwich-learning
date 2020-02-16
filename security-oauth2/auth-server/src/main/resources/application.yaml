@@ -58,6 +58,21 @@ server:
   servlet:
     # 不配置，单点登录出现问题
     context-path: /uas
+    session:
+      cookie:
+        name: AUTH_SESSION
+
+security:
+  oauth2:
+    resource:
+      token-info-uri: /api/userInfo
+    authorization:
+      jwt:
+        key-store: eboot-jwt.jks
+        key-alias: eboot-jwt
+        key-password: jwt-eboot
+        key-store-password: eboot-secret
+
 
 management:
   endpoints:
@@ -79,6 +94,7 @@ settings:
       - /webjars/**
       - /actuator/**
       - /druid/**
+      - /error
       - /swagger-ui.html
       - /swagger-resources/**
       - /v2/api-docs

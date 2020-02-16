@@ -24,7 +24,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@RequestMapping(value = "/client")
+@RequestMapping(value = "/api/client")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ClientController {
 

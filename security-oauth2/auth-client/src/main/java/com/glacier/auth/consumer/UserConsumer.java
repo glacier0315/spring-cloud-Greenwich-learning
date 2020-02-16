@@ -16,7 +16,7 @@ import java.util.List;
  * @version 1.0
  * @date 2020-02-13 22:25
  */
-@FeignClient(value = "auth-resource", path = "/user", fallback = UserConsumerFallback.class)
+@FeignClient(value = "auth-resource", path = "/api/user", fallback = UserConsumerFallback.class)
 public interface UserConsumer {
 
     /**

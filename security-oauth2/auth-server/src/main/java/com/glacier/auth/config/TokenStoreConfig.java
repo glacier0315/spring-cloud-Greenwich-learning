@@ -3,10 +3,13 @@ package com.glacier.auth.config;
 import com.glacier.auth.entity.dto.UserDetailsDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.oauth2.authserver.AuthorizationServerProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
@@ -16,20 +19,24 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
-import java.security.KeyPair;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
+ * tokenStore 配置
+ *
  * @author glacier
  * @version 1.0
  * @date 2020-02-09 08:28
  */
 @Configuration
+@EnableConfigurationProperties({AuthorizationServerProperties.class})
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class TokenStoreConfig {
     private final UserDetailsService userDetailsService;
+    private final AuthorizationServerProperties authorization;
 
     /**
      * 设置jwt 存储token
@@ -50,10 +57,15 @@ public class TokenStoreConfig {
     @Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
         JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
-        KeyPair keyPair = new KeyStoreKeyFactory(new ClassPathResource("eboot-jwt.jks"), "eboot-secret".toCharArray())
-                .getKeyPair("eboot-jwt", "jwt-eboot".toCharArray());
+        Resource keyStore = new ClassPathResource(this.authorization.getJwt().getKeyStore());
+        char[] keyStorePassword = this.authorization.getJwt().getKeyStorePassword().toCharArray();
+        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(keyStore, keyStorePassword);
+        String keyAlias = this.authorization.getJwt().getKeyAlias();
+        char[] keyPassword = (char[]) Optional.ofNullable(this.authorization.getJwt().getKeyPassword())
+                .map(String::toCharArray)
+                .orElse(keyStorePassword);
         // 使用非对称加密
-        accessTokenConverter.setKeyPair(keyPair);
+        accessTokenConverter.setKeyPair(keyStoreKeyFactory.getKeyPair(keyAlias, keyPassword));
         return accessTokenConverter;
     }
 

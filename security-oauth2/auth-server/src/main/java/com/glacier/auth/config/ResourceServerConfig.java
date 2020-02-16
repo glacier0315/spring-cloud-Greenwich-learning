@@ -1,14 +1,11 @@
 package com.glacier.auth.config;
 
 import com.alibaba.fastjson.JSONWriter;
-import com.glacier.auth.settings.SecuritySettings;
 import com.glacier.common.core.http.HttpResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
@@ -22,24 +19,16 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
  */
 @Configuration
 @EnableResourceServer
-@EnableConfigurationProperties(SecuritySettings.class)
-@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
-    private final SecuritySettings securitySettings;
-
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        String[] permitAll = new String[0];
-        if (securitySettings.getPermitAll() != null && !securitySettings.getPermitAll().isEmpty()) {
-            permitAll = securitySettings.getPermitAll().toArray(permitAll);
-        }
-        http.authorizeRequests()
-                .antMatchers(permitAll)
-                .permitAll()
-                .antMatchers("/hello")
-                .permitAll()
+        // 指定范围为/api
+        http.requestMatchers()
+                .antMatchers("/api/**")
+                .and()
+                .authorizeRequests()
                 .anyRequest()
                 .authenticated()
                 .and()
