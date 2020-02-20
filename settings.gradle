@@ -19,5 +19,6 @@ include('gateway:gateway1')
 include(
         'security-oauth2:auth-server',
         'security-oauth2:auth-resource',
-        'security-oauth2:auth-client'
+        'security-oauth2:auth-client',
+        'security-oauth2:github-sso'
 )
