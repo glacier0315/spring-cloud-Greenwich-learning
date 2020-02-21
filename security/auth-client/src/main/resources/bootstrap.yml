@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: auth-client
+  boot:
+    admin:
+      client:
+        url: http://${BOOT_ADMIN_HOST:192.168.10.1}:${BOOT_ADMIN_PORT:8091}
+        instance:
+          prefer-ip: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${REGISTER_HOST:192.168.10.130}:${REGISTER_PORT:8848}

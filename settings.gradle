@@ -22,3 +22,9 @@ include(
         'security-oauth2:auth-client',
         'security-oauth2:github-sso'
 )
+
+// 引入
+include(
+        'security:auth-resource',
+        'security:auth-client'
+)

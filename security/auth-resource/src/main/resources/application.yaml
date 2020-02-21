@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: dev
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://192.168.10.1:8510/uas
+          jwk-set-uri: http://192.168.10.1:8510/uas/oauth/token_keys
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
